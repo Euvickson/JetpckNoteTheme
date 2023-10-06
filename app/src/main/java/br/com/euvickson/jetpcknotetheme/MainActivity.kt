@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import br.com.euvickson.jetpcknotetheme.data.NoteDataSource
 import br.com.euvickson.jetpcknotetheme.screen.NoteScreen
 import br.com.euvickson.jetpcknotetheme.ui.theme.JetpckNoteThemeTheme
 
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     NoteScreen(
-                        notes = emptyList(),
+                        notes = NoteDataSource().loadNotes(),
                         onAddNote = {},
                         onRemoveNote = {}
                     )
