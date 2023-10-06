@@ -24,10 +24,15 @@ import androidx.compose.ui.unit.dp
 import br.com.euvickson.jetpcknotetheme.R
 import br.com.euvickson.jetpcknotetheme.components.NoteButton
 import br.com.euvickson.jetpcknotetheme.components.NoteInputText
+import br.com.euvickson.jetpcknotetheme.model.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteScreen() {
+fun NoteScreen(
+    notes: List<Note>,
+    onAddNote: (Note) -> Unit,
+    onRemoveNote: (Note) -> Unit
+) {
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -64,7 +69,16 @@ fun NoteScreen() {
                 }
             )
 
-            NoteButton(text = "Save", onClick = { })
+            NoteButton(
+                text = "Save",
+                onClick = {
+                    if (title.isNotEmpty() && description.isNotEmpty()) {
+                        //Save|Add to the List
+                        title = ""
+                        description = ""
+                    }
+                }
+            )
         }
 
     }
@@ -73,5 +87,5 @@ fun NoteScreen() {
 @Preview(showBackground = true)
 @Composable
 fun NoteScreenPreview() {
-    NoteScreen()
+    NoteScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
 }
