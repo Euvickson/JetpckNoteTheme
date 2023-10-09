@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -51,6 +53,9 @@ android {
 
 dependencies {
 
+    val room_version = "2.5.2"
+    val hilt_version = "2.44"
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
@@ -69,4 +74,5 @@ dependencies {
 
     //lifecycle dependency
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+
 }
