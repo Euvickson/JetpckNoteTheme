@@ -20,7 +20,9 @@ import br.com.euvickson.jetpcknotetheme.model.Note
 import br.com.euvickson.jetpcknotetheme.screen.NoteScreen
 import br.com.euvickson.jetpcknotetheme.screen.NoteViewModel
 import br.com.euvickson.jetpcknotetheme.ui.theme.JetpckNoteThemeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
