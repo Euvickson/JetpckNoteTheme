@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -53,8 +52,8 @@ android {
 
 dependencies {
 
-    val room_version = "2.5.2"
-    val hilt_version = "2.44"
+    val roomVersion = "2.5.2"
+    val hiltVersion = "2.44"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -75,4 +74,23 @@ dependencies {
     //lifecycle dependency
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
+    //Hilt-Dagger
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+
+//Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+// To use Kotlin annotation processing tool (kapt) MUST HAVE!
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+
+
+// Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2")
 }
+
