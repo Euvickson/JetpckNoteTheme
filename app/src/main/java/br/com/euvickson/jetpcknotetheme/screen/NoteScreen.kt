@@ -140,10 +140,10 @@ fun NoteRow(
                 style = MaterialTheme.typography.titleSmall
             )
 
-            Text(
-                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d, MMM")),
-                style = MaterialTheme.typography.labelSmall
-            )
+//            Text(
+//                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d, MMM")),
+//                style = MaterialTheme.typography.labelSmall
+//            )
 
         }
 

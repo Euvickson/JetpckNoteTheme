@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -53,7 +54,7 @@ android {
 
 dependencies {
 
-    val roomVersion = "2.5.2"
+    val roomVersion = "2.6.0"
     val hiltVersion = "2.44"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -77,7 +78,7 @@ dependencies {
 
     //Hilt-Dagger
     implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
 //Room
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -95,3 +96,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2")
 }
 
+kapt {
+    correctErrorTypes = true
+}
