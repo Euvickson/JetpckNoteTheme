@@ -55,7 +55,7 @@ android {
 dependencies {
 
     val roomVersion = "2.6.0"
-    val hiltVersion = "2.44"
+    val hiltVersion = "2.48.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
