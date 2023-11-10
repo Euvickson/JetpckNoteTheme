@@ -36,7 +36,7 @@ import br.com.euvickson.jetpcknotetheme.components.NoteButton
 import br.com.euvickson.jetpcknotetheme.components.NoteInputText
 import br.com.euvickson.jetpcknotetheme.data.NoteDataSource
 import br.com.euvickson.jetpcknotetheme.model.Note
-import java.time.format.DateTimeFormatter
+import br.com.euvickson.jetpcknotetheme.util.formatDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -97,7 +97,7 @@ fun NoteScreen(
                         onAddNote(Note(title = title, description = description))
                         title = ""
                         description = ""
-                        Toast.makeText(context, "Note Added", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Note Added", Toast.LENGTH_SHORT).show()
                     }
                 })
             Divider(modifier = Modifier.padding(10.dp))
@@ -140,10 +140,10 @@ fun NoteRow(
                 style = MaterialTheme.typography.titleSmall
             )
 
-//            Text(
-//                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d, MMM")),
-//                style = MaterialTheme.typography.labelSmall
-//            )
+            Text(
+                text = formatDate(note.entryDate.time),
+                style = MaterialTheme.typography.labelSmall
+            )
 
         }
 
