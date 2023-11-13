@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.euvickson.jetpcknotetheme.screen.NoteScreen
 import br.com.euvickson.jetpcknotetheme.screen.NoteViewModel
 import br.com.euvickson.jetpcknotetheme.ui.theme.JetpckNoteThemeTheme
@@ -43,7 +42,8 @@ fun NotesApp(noteViewModel: NoteViewModel) {
     NoteScreen(
         notes = notesList,
         onRemoveNote = { noteViewModel.removeNote(it) },
-        onAddNote = { noteViewModel.addNote(it) }
+        onAddNote = { noteViewModel.addNote(it) },
+        onEditNote = {noteViewModel.updateNote(it)}
     )
 }
 

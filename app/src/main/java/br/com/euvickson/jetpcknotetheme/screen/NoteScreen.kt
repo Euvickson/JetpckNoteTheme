@@ -1,7 +1,8 @@
 package br.com.euvickson.jetpcknotetheme.screen
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -43,11 +44,12 @@ import br.com.euvickson.jetpcknotetheme.util.formatDate
 fun NoteScreen(
     notes: List<Note>,
     onAddNote: (Note) -> Unit,
-    onRemoveNote: (Note) -> Unit
+    onRemoveNote: (Note) -> Unit,
+    onEditNote: (Note) -> Unit
 ) {
-
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    val buttonState = remember { mutableStateOf("Save") }
     val context = LocalContext.current
 
     Column(modifier = Modifier.padding(6.dp)) {
@@ -91,22 +93,33 @@ fun NoteScreen(
             )
 
             NoteButton(
-                text = "Save",
+                text = buttonState.value,
                 onClick = {
-                    if (title.isNotEmpty() && description.isNotEmpty()) {
+                    if (title.isNotEmpty() && description.isNotEmpty() && buttonState.value == "Save") {
                         onAddNote(Note(title = title, description = description))
                         title = ""
                         description = ""
                         Toast.makeText(context, "Note Added", Toast.LENGTH_SHORT).show()
+                    } else if (title.isNotEmpty() && description.isNotEmpty() && buttonState.value == "Update") {
+                        Toast.makeText(context, "Note Updated", Toast.LENGTH_SHORT).show()
+                        title = ""
+                        description = ""
+                        buttonState.value = "Save"
                     }
                 })
+
             Divider(modifier = Modifier.padding(10.dp))
 
-            LazyColumn() {
+            LazyColumn {
                 items(notes) { note ->
-                    NoteRow(note = note, onNoteClicked = {
-                        onRemoveNote(it)
-                    })
+                    NoteRow(note = note,
+                        onNoteClicked = {onRemoveNote(it)},
+                        onNoteLongClicked = {
+                            title = it.title
+                            description = it.description
+                            buttonState.value = "Update"
+                        }
+                    )
                 }
             }
         }
@@ -114,11 +127,13 @@ fun NoteScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteRow(
     modifier: Modifier = Modifier,
     note: Note,
-    onNoteClicked: (Note) -> Unit) {
+    onNoteClicked: (Note) -> Unit,
+    onNoteLongClicked: (Note) -> Unit){
     Surface (
         modifier
             .padding(4.dp)
@@ -127,7 +142,10 @@ fun NoteRow(
 
         Column (
             modifier
-                .clickable { onNoteClicked(note) }
+                .combinedClickable(
+                    onClick = { onNoteClicked(note) },
+                    onLongClick = {onNoteLongClicked(note)}
+                )
                 .padding(horizontal = 14.dp, vertical = 6.dp)){
 
             Text(
@@ -153,5 +171,5 @@ fun NoteRow(
 @Preview(showBackground = true)
 @Composable
 fun NoteScreenPreview() {
-    NoteScreen(notes = NoteDataSource().loadNotes(), onAddNote = {}, onRemoveNote = {})
+    NoteScreen(notes = NoteDataSource().loadNotes(), onAddNote = {}, onRemoveNote = {}, onEditNote = {})
 }
